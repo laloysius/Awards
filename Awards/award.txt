@@ -1,0 +1,36 @@
+Award:
+
+CSV File :Tracker Award Upload
+path:\\grsqlsvr01.gulfrelay.local\ApolloInfo\Awards\
+
+New file: Tracker Award Upload_01202023_09_18_37.arc
+
+Process flow:
+
+1.	User upload file Tracker Award Upload.csv  (using web upload tool – will be available) or copy to \\grsqlsvr01.gulfrelay.local\ApolloInfo\Awards.
+2.	Scheduled ETL process will run and check for file existence. If exists, process will retrieve the data and insert into temp table.  If not exists, process will end.
+3.	If the file exists and opened for edit, process will email to user (Jaclyn) asking to close the file.
+4.	The process will use the temp table to filter and remove following criteria rows before insert into table ‘Award Tracking_dev’
+a.	Removes all rows with ‘CustomerId’ is NULL/EMPTY
+b.	Removes all rows with uniqueness.
+5.	Once inserted, process will rename the file with datetime (Tracker Award Upload_2022-12-22 11_51.arc ) and move to archive folder ( \\grsqlsvr01.gulfrelay.local\ApolloInfo\Awards\Archive ).
+
+Please let me know if you have any questions.
+
+Following columns make uniqueness:
+
+•	Customer_ID
+•	Brokerage_Asset
+•	Go_Live_Date
+•	Expiration_Date
+•	Lane_name
+•	Orig_loading_type
+•	Dest_unloading_type
+•	Multi_stop
+•	Equipment_type
+•	Mode_type
+•	Lane_Type
+•	Hazmat
+•	Tanker_endorsement
+
+UF Flag
